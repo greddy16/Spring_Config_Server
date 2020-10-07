@@ -21,24 +21,24 @@ spec:
           value: "0"
         ports:
         - containerPort: 8888
-#         livenessProbe:
-#           httpGet:
-#             path: /
-#             port: 8888
-#           initialDelaySeconds: 60
-#           periodSeconds: 5
-#           successThreshold: 1
-#           failureThreshold: 3
-#           timeoutSeconds: 1
-#         readinessProbe:
-#           httpGet:
-#             path: /
-#             port: 8888
-#           initialDelaySeconds: 60
-#           periodSeconds: 5
-#           successThreshold: 1
-#           failureThreshold: 3
-#           timeoutSeconds: 1
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8888
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8888
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          timeoutSeconds: 1
         resources:
           limits:
             memory: "2048Mi"
