@@ -13,7 +13,7 @@ VOLUME /tmp
 RUN mkdir -p /logs
 RUN mkdir scripts
 RUN chmod 777 /logs
-EXPOSE 8080
+EXPOSE 8888
 
 ADD target/*.jar spring-config-server-api.jar
-ENTRYPOINT ["java","-Dspring.profiles.active=test","-Xms512m","-Xmx3072m","-Dlogging.file=/logs/spring-config-test.log","-Dserver.port=8080","-jar","spring-config-server-api.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=test","-Xms512m","-Xmx3072m","-Dlogging.file=/logs/spring-config-test.log","-Dserver.port=8888","-jar","spring-config-server-api.jar"]
