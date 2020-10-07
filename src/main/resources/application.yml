@@ -7,6 +7,7 @@ spring:
         git:
           uri: https://github.com/greddy16/spring-cloud-config-server-properties
           clone-on-start: true
+          skip-ssl-validation: true
 
 server:
   port: 8888
