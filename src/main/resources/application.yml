@@ -5,9 +5,12 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/greddy16/spring-cloud-config-server-properties
+          uri: https://configserver@dev.azure.com/configserver/spring-cloud-config-server-properties/_git/spring-cloud-config-server-properties
           clone-on-start: true
           skip-ssl-validation: true
+          username: configserver
+          password: ngjvnekkdcoospwk6tyqbzoqp7ztnwycq5no4idw5l7dw5unx3ta
+          search-paths: local
 
 server:
   port: 8888
