@@ -11,6 +11,9 @@ spring:
           username: configserver
           password: ngjvnekkdcoospwk6tyqbzoqp7ztnwycq5no4idw5l7dw5unx3ta
           search-paths: test
-
+azure:
+  application-insights:
+    instrumentation-key: 74f39c2c-6445-4328-9a2c-dab78a461d03
+   
 server:
   port: 8888
