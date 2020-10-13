@@ -39,12 +39,12 @@ spec:
 #           successThreshold: 1
 #           failureThreshold: 3
 #           timeoutSeconds: 1
-        resources:
-          limits:
-            memory: "2048Mi"
-            cpu: "1"
-          requests:
-            memory: "1024Mi"
-            cpu: "0.5"
+#         resources:
+#           limits:
+#             memory: "2048Mi"
+#             cpu: "1"
+#           requests:
+#             memory: "1024Mi"
+#             cpu: "0.5"
       imagePullSecrets:
       - name: oeo-acr-secret
