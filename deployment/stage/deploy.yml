@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: spring-config-server-api-stage-dep
+  #namespace: stage
+  labels:
+    app: spring-config-server-api-stage-dep
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: spring-config-server-api-stage-dep
+    spec:
+      containers:
+      - name: spring-config-server-api-stage-dep
+        image: oeotstuscacr.azurecr.io/spring-config-server-api-stage:latest
+        command: ["java","-Dspring.profiles.active=test","-Xms2048m","-Xmx3072m","-Dlogging.file=/logs/spring-config-stage.log","-Dserver.port=8888","-jar","spring-config-server-api.jar"]
+        env:
+        - name: START_DELAY
+          value: "0"
+        ports:
+        - containerPort: 8888
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: 8888
+#           initialDelaySeconds: 60
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 3
+#           timeoutSeconds: 1
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 8888
+#           initialDelaySeconds: 60
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 3
+#           timeoutSeconds: 1
+#         resources:
+#           limits:
+#             memory: "2048Mi"
+#             cpu: "1"
+#           requests:
+#             memory: "1024Mi"
+#             cpu: "0.5"
+      imagePullSecrets:
+      - name: oeo-acr-secret
