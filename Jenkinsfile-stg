@@ -80,7 +80,7 @@
                         
                         
                         elif [[ $ENVIRONMENT_NAME == "stage" ]] ; then
-                        CLUSTER_NAME=oeo-stg-us-c-aks
+                        CLUSTER_NAME=oeo-stg-us-c-vm-aks
                         echo "CLUSTER NAME: $CLUSTER_NAME"
                         
                         elif [[ $ENVIRONMENT_NAME == "prod" ]] ; then
