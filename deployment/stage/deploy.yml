@@ -23,21 +23,27 @@ spec:
         ports:
         - containerPort: 8080
         livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - "if [ -f /nag.txt ]; then exit 1; fi"
           initialDelaySeconds: 60
           periodSeconds: 5
           successThreshold: 1
           failureThreshold: 3
+          timeoutSeconds: 1 
         readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - "if [ -f /nag.txt ]; then exit 1; fi"
           initialDelaySeconds: 60
           periodSeconds: 5
           successThreshold: 1
           failureThreshold: 3
+          timeoutSeconds: 1  
         resources:
           limits:
             memory: "2048Mi"
