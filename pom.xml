@@ -11,7 +11,7 @@
 	<groupId>com.optum.xapi</groupId>
 	<artifactId>login-experience-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>login-experience-api</name>
+	<name>spring-config-server</name>
 	<description>Spring boot config server</description>
 
 	<properties>
