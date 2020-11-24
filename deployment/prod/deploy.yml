@@ -4,7 +4,7 @@ metadata:
   name: spring-config-server-api-prod-dep
   #namespace: notif-api
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: spring-config-server-api-prod-dep
@@ -14,7 +14,7 @@ spec:
         app: spring-config-server-api-prod-dep
     spec:
       containers:
-      - image: oeotstuscacr.azurecr.io/spring-config-server-api-prod:latest
+      - image: oeoprduscacr.azurecr.io/spring-config-server-api-prod:latest
         command: ["java","-Dspring.profiles.active=prod","-Xms2048m","-Xmx3072m","-Dlogging.file=/logs/spring-config-prod.log","-Dserver.port=8888","-jar","spring-config-server-api.jar"]
         name: spring-config-server-api-prod-dep
         env:
