@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-config-server-api-prod-dep
+  #namespace: notif-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-config-server-api-prod-dep
+  template:
+    metadata:
+      labels:
+        app: spring-config-server-api-prod-dep
+    spec:
+      containers:
+      - image: oeotstuscacr.azurecr.io/spring-config-server-api-prod:latest
+        command: ["java","-Dspring.profiles.active=prod","-Xms2048m","-Xmx3072m","-Dlogging.file=/logs/spring-config-prod.log","-Dserver.port=8888","-jar","spring-config-server-api.jar"]
+        name: spring-config-server-api-prod-dep
+        env:
+        - name: START_DELAY
+          value: "0"        
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: "2048Mi"
+            cpu: "1"
+          requests:
+            memory: "1024Mi"
+            cpu: "0.5"    
+      imagePullSecrets:
+        - name: oeo-acr-secret
