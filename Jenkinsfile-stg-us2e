@@ -110,7 +110,7 @@
                              
                              MODULE_NAME=spring-config-server-api-stage
                              
-                             KUBERNETES_NAMESPACE=test
+                             KUBERNETES_NAMESPACE=stage
                              ACR_HUB=oeotstuscacr.azurecr.io
                              ACR_USER=oeotstuscacr
                              
