@@ -74,11 +74,11 @@
                               RESOURCE_GROUP=""
 
                               if [[ $ENVIRONMENT_NAME == "performance" ]] ; then
-                                   RESOURCE_GROUP=ocp-prf-us-c-rg
+                                   RESOURCE_GROUP=oeo-prf-us-c-rg
                                    echo "RESOURCE_GROUP: $RESOURCE_GROUP"
                                    
                                    elif [[ $ENVIRONMENT_NAME == "stage" ]] ; then
-                                     RESOURCE_GROUP=ocp-stg-us-c-rg
+                                     RESOURCE_GROUP=oeo-stg-us-c-rg
                                      echo "RESOURCE_GROUP: $RESOURCE_GROUP"
 
                                    elif [[ $ENVIRONMENT_NAME == "test" ]] ; then
