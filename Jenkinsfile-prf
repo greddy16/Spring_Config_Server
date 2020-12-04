@@ -73,7 +73,7 @@
                             
                               RESOURCE_GROUP=""
 
-                              if [[ $ENVIRONMENT_NAME == "performance" ]] ; then
+                              if [[ $ENVIRONMENT_NAME == "perf" ]] ; then
                                    RESOURCE_GROUP=oeo-prf-us-c-rg
                                    echo "RESOURCE_GROUP: $RESOURCE_GROUP"
                                    
@@ -110,7 +110,7 @@
                              
                              MODULE_NAME=spring-config-server-api-perf
                              
-                             KUBERNETES_NAMESPACE=test
+                             KUBERNETES_NAMESPACE=perf
                              ACR_HUB=oeotstuscacr.azurecr.io
                              ACR_USER=oeotstuscacr
                              
