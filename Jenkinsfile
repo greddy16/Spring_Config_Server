@@ -163,7 +163,7 @@ pipeline{
                 }
             }
 
-            stage('store-references-api'){
+            stage('spring-config-server-api'){
                 steps{
                     script{
                         sh "mvn clean package -DskipTests"
