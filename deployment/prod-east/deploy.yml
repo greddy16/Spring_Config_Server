@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-config-server-api-prod-east-dep
+  #namespace: notif-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-config-server-api-prod-east-dep
+  template:
+    metadata:
+      labels:
+        app: spring-config-server-api-prod-east-dep
+    spec:
+      containers:
+      - image: oeoprdus2eacr.azurecr.io/spring-config-server-api-prod-east:latest
+        command: ["java","-Dspring.profiles.active=prod-east","-Xms2048m","-Xmx3072m","-Dlogging.file=/logs/spring-config-server-api-prod-east.log","-Dserver.port=8080","-jar","spring-config-server-api.jar"]
+
+        name: spring-config-server-api-prod-east-dep
+        env:
+        - name: START_DELAY
+          value: "0"        
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        resources:
+          limits:
+            memory: "2048Mi"
+            cpu: "1"
+          requests:
+            memory: "1024Mi"
+            cpu: "0.5"    
+      imagePullSecrets:
+        - name: oeo-acr-secret
