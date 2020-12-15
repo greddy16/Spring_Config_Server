@@ -19,26 +19,26 @@ def getEnvName(RESOURCE_GROUP) {
     } else if ("prod-east".equals(ENVIRONMENT_NAME)) {
     return "oeo-prd-us2-e-rg";
     } else {
-    return "please set the environment and cluster";
+    return "please set the environment and get resource group";
     break;
     }
 }
 
 def getModuleName(MODULE_NAME) {
     if("test".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-test";
+    return "spring-config-server-api-test";
     } else if ("stage".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-stage";
+    return "spring-config-server-api-stage";
     } else if ("stage-east".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-stage";
+    return "spring-config-server-api-stage-east";
     } else if ("perf".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-perf";
+    return "spring-config-server-api-perf";
     } else if ("prod".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-prod";
+    return "spring-config-server-api-prod";
     } else if ("prod-east".equals(ENVIRONMENT_NAME)) {
-    return "store-references-api-prod";
+    return "spring-config-server-api-prod-east";
     } else {
-    return "please set the environment and cluster";
+    return "please set the environment and get module name";
     break;
     }
 }
@@ -49,7 +49,7 @@ def getACR(DOCKER_REG_URL) {
     } else if ("stage".equals(ENVIRONMENT_NAME)) {
     return "https://oeotstuscacr.azurecr.io";
     } else if ("stage-east".equals(ENVIRONMENT_NAME)) {
-    return "https://oeotstus2eacr.azurecr.io";
+    return "https://oeostgus2eacr.azurecr.io";
     } else if ("perf".equals(ENVIRONMENT_NAME)) {
     return "https://oeotstuscacr.azurecr.io";
     } else if ("prod".equals(ENVIRONMENT_NAME)) {
@@ -57,7 +57,7 @@ def getACR(DOCKER_REG_URL) {
     } else if ("prod-east".equals(ENVIRONMENT_NAME)) {
     return "https://oeoprdus2eacr.azurecr.io";
     } else {
-    return "please set the environment and cluster";
+    return "please set the environment and get container registry";
     break;
     }
 }
@@ -76,7 +76,7 @@ def getClusterName(AKS_CLUSTER_NAME) {
     } else if ("prod-east".equals(ENVIRONMENT_NAME)) {
     return "oeo-prd-us2-e-aks";
     } else {
-    return "please set the environment and cluster";
+    return "please set the environment and get cluster";
     break;
     }
 }
@@ -92,26 +92,26 @@ def getConnACR(ACR_REG_ID) {
     return "oeoprdus2ecacr";
     } 
     else {
-    return "please pass environment appropriately";
+    return "please set the environment and get container registry ID";
     break;
     }
 }
 
-def getConnEnv(ENV_SERVICE_PRINCIPAL_NAME) {
-    if("test".equals(ENVIRONMENT_NAME) || "stage".equals(ENVIRONMENT_NAME) || "perf".equals(ENVIRONMENT_NAME)) {
+def getConnSP(ENV_SERVICE_PRINCIPAL_NAME) {
+    if("test".equals(ENVIRONMENT_NAME) || "stage".equals(ENVIRONMENT_NAME) || "stage-east".equals(ENVIRONMENT_NAME) || "perf".equals(ENVIRONMENT_NAME)) {
     return "onb-nonprod-sp";
     } else if ("prod".equals(ENVIRONMENT_NAME) || "prod-east".equals(ENVIRONMENT_NAME)) {
     return "onb-prod-sp";
     } 
     else {
-    return "please pass environment appropriately";
+    return "please set the environment and get service principal";
     break;
     }
 }
 
 pipeline{
                
-        agent{
+        agent {
             label 'docker-azcli-kubectl-slave'
         }
       
@@ -123,7 +123,7 @@ pipeline{
             RESOURCE_GROUP                  = getEnvName(env.ENVIRONMENT_NAME)
             MODULE_NAME                     = getModuleName(MODULE_NAME)
             CLUSTER_NAME                    = getClusterName(env.ENVIRONMENT_NAME)
-            ENV_SERVICE_PRINCIPAL_NAME      = getConnEnv(env.ENVIRONMENT_NAME)
+            ENV_SERVICE_PRINCIPAL_NAME      = getConnSP(env.ENVIRONMENT_NAME)
             ACR_REG_ID                      = getConnACR(env.ENVIRONMENT_NAME)
             DOCKER_REG_URL                  = getACR(env.ENVIRONMENT_NAME)
         }
@@ -143,6 +143,7 @@ pipeline{
                     echo 'ENVITONMENT           : ' + env.ENVIRONMENT_NAME
                     echo 'AKS CLUSTER           : ' + env.CLUSTER_NAME
                     echo 'RESOURCE GROUP NAME   : ' + env.RESOURCE_GROUP
+                    echo 'ACR ID                : ' + env.ACR_REG_ID
                     echo '########################################################'
                 }
             }
@@ -155,7 +156,7 @@ pipeline{
                 }
             }
 
-            stage('checkout'){
+            stage('checkout') {
               steps{
                 script{
                   checkout scm
@@ -163,31 +164,31 @@ pipeline{
                 }
             }
 
-            stage('spring-config-server-api'){
-                steps{
-                    script{
+            stage('spring-config-server-api-east') {
+                steps {
+                    script {
                         sh "mvn clean package -DskipTests"
                     }
                 }
             }
     
-            stage ('Proceeding with SonarQube Scan ') {​​​​​
-                steps {​​​​​
-                    script {​​​​​
-                        if ( params.ENVIRONMENT_NAME == 'test') {​​​​​
+            stage ('Proceeding with SonarQube Scan ') {
+                steps {
+                    script {
+                        if ( params.ENVIRONMENT_NAME == 'test') {
                         sh '''
                         mvn compile org.jacoco:jacoco-maven-plugin:0.8.5:prepare-agent install -Dmaven.test.failure.ignore=true
-    				            mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar -Dsonar.host.url=https://sonar.optum.com -Dsonar.login=2807583897b7a398a92adc74becf170f3c2b3a16 -e
+    				    mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar -Dsonar.host.url=https://sonar.optum.com -Dsonar.login=2807583897b7a398a92adc74becf170f3c2b3a16 -e
                         '''
-                        }​​​​​
-                    }​​​​​
-                }​​​​​
-            }​​​​​
+                        }
+                    }
+                }
+            }
 
-            stage('Fortify'){
-                steps{
-                    script{
-                        if ( params.ENVIRONMENT_NAME == 'test') {​​​​​
+            stage('Fortify') {
+                steps {
+                    script {
+                        if ( params.ENVIRONMENT_NAME == 'test') {
                         glFortifyScan fortifyBuildName: "HDENROLLPREFERENCES",
                         scarProjectName: "HDENROLLPREFERENCES",
                         fortifyJdkVersion: "1.8",
@@ -228,9 +229,9 @@ pipeline{
                 }
             }
  
-            stage ('ACR deployment in AKS cluster'){
-                steps{
-                    script{
+            stage ('ACR deployment in AKS cluster') {
+                steps {
+                    script {
                         withCredentials([azureServicePrincipal(env.ENV_SERVICE_PRINCIPAL_NAME)]) {
                         sh '''
                         . /etc/profile.d/jenkins.sh
@@ -240,8 +241,8 @@ pipeline{
 
                         MODULE_NAME=${MODULE_NAME}
                         KUBERNETES_NAMESPACE=${ENVIRONMENT_NAME}
-                        #ACR_HUB=oeotstuscacr.azurecr.io
-                        #ACR_USER=oeotstuscacr
+                        #ACR_HUB=${DOCKER_REG_URL}
+                        #ACR_USER=${ACR_REG_ID}
                         SERVICE_NAME=${MODULE_NAME}-svc
                         DEPLOYMENT_NAME=${MODULE_NAME}-dep
                         # Create or update the deployment
