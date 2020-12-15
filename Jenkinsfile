@@ -164,7 +164,7 @@ pipeline{
                 }
             }
 
-            stage('spring-config-server-api-east') {
+            stage('spring-config-server-api') {
                 steps {
                     script {
                         sh "mvn clean package -DskipTests"
