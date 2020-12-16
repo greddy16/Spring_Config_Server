@@ -14,7 +14,7 @@ spec:
         app: spring-config-server-api-prod-east-dep
     spec:
       containers:
-      - image: oeoprdus2eacr.azurecr.io/cspring-config-server-api-prod-east:latest
+      - image: oeoprdus2eacr.azurecr.io/spring-config-server-api-prod-east:latest
         command: ["java","-Dspring.profiles.active=prod-east","-Xms2048m","-Xmx3072m","-Dlogging.file=/logs/spring-config-server-api-prod-east.log","-Dserver.port=8080","-jar","spring-config-server-api.jar"]
         name: spring-config-server-api-prod-east-dep
         env:
