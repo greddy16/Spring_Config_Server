@@ -259,7 +259,7 @@ pipeline{
 
                             #Create hpa.yml  
                             #cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
-                            #kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #kubectl --namespace=$KUBERNETES_NAMESPACE apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
                     
                         else
                             echo "********************************************************************************************************"
@@ -272,7 +272,7 @@ pipeline{
 
                             #Create hpa.yml  
                             #cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
-                            #kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #kubectl --namespace=$KUBERNETES_NAMESPACE apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
                        
                             docker rmi -f ${MODULE_NAME}:latest
                         fi
