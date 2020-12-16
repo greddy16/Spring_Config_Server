@@ -89,7 +89,7 @@ def getConnACR(ACR_REG_ID) {
     } else if ("prod".equals(ENVIRONMENT_NAME)) {
     return "oeoprduscacr";
     } else if ("prod-east".equals(ENVIRONMENT_NAME)) {
-    return "oeoprdus2ecacr";
+    return "oeoprdus2eacr";
     } 
     else {
     return "please set the environment and get container registry ID";
