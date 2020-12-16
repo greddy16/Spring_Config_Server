@@ -258,8 +258,8 @@ pipeline{
                             kubectl --namespace=$KUBERNETES_NAMESPACE apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/deploy-$BUILD_NUMBER.yml
 
                             #Create hpa.yml  
-                            cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
-                            kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
                     
                         else
                             echo "********************************************************************************************************"
@@ -271,8 +271,8 @@ pipeline{
                             kubectl --namespace=$KUBERNETES_NAMESPACE create -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/deploy.yml
 
                             #Create hpa.yml  
-                            cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
-                            kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #cat $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
+                            #kubectl --namespace=$KUBERNETES_NAMESPACE --kubeconfig config apply -f $WORKSPACE/deployment/$ENVIRONMENT_NAME/hpa.yml
                        
                             docker rmi -f ${MODULE_NAME}:latest
                         fi
