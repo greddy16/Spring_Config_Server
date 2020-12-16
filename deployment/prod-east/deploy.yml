@@ -22,22 +22,6 @@ spec:
           value: "0"        
         ports:
         - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
         resources:
           limits:
             memory: "2048Mi"
