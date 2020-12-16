@@ -16,7 +16,7 @@ azure:
   keyvault:
     client-id: 879c9928-96e2-4714-9a24-63a5028bbb32
     client-key: abf22e7f-850a-4e4c-8518-0738176f8ebe
-    uri: https://oeo-prd-us2-e-kv.vault.azure.net/
+    uri: https://oeo-prd-us2-e-key.vault.azure.net/
 
 server:
   port: 8888
