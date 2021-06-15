@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM docker.optum.com/xapipoc/openjdk:8-jdk-alpine
 ENV LANG C.UTF-8
 ENV MIN_HEAP_SIZE='-Xms1536m' 
 ENV MAX_HEAP_SIZE='-Xmx1536m' 
