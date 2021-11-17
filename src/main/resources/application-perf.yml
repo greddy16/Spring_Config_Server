@@ -5,12 +5,12 @@ spring:
     config:
       server:
         git:
-          uri: https://configserver@dev.azure.com/configserver/spring-cloud-config-server-properties/_git/spring-cloud-config-server-properties
+          uri: ${config-server-azure-git-uri}
           clone-on-start: true
           skip-ssl-validation: true
-          username: configserver
-          password: ngjvnekkdcoospwk6tyqbzoqp7ztnwycq5no4idw5l7dw5unx3ta
-          search-paths: perf
+          username: ${config-server-azure-git-username}
+          password: ${config-server-azure-git-password}
+          search-paths: ${config-server-azure-git-folder-location}
 azure:
   keyvault:
     client-id: ${keyvault-client-id}
