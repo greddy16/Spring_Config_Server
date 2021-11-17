@@ -14,9 +14,9 @@ spring:
 
 azure:
   keyvault:
-    client-id: c606f0a4-ce8e-4c0d-9939-1365473e620d
-    client-key: kxrT3.ZfX2DRHI5XvCS4.fAlmBjP-SoqGU
-    uri: https://oeo-stg-us-c-kv.vault.azure.net/
+    client-id: ${keyvault-client-id}
+    client-key: ${keyvault-client-key}
+    uri: ${keyvault-uri}
 
 server:
   port: 8888
